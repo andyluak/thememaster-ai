@@ -30,7 +30,7 @@ const ColorPalette = ({ palette }: Props) => {
                   className="flex flex-row items-center gap-4"
                   key={colorKey}
                 >
-                  <TypographyP className="min-w-[150px] font-semibold capitalize">
+                  <TypographyP className="min-w-[6rem] md:min-w-[8rem] font-semibold capitalize">
                     {colorKey}
                   </TypographyP>
                   {colorArray
@@ -53,9 +53,9 @@ const ColorPalette = ({ palette }: Props) => {
           onClick={() => saveAsJson(colors)}
           className="bg-accent text-xs"
         >
-          Save as JSON
+          JSON
         </Button>
-        <Button className="bg-accent text-xs">Tailwind Config</Button>
+        <Button className="bg-accent text-xs">Tailwind</Button>
         <Button className="bg-accent text-xs">CSS Config</Button>
         <Button className="bg-accent text-xs">Duplicate</Button>
       </div>
