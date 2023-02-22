@@ -8,6 +8,7 @@ function Logo() {
     <div className="h-20 w-20">
       <Link href="/">
         <LogoIcon className="h-20 w-20" />
+        <p className="sr-only">ThemeMaster AI</p>
       </Link>
     </div>
   );

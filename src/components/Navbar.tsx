@@ -5,6 +5,7 @@ import Link from "next/link";
 import React from "react";
 
 import Logo from "./Logo";
+import MobileNav from "./MobileNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ function Navbar() {
       )}
     >
       <Logo />
-      <nav className="flex flex-row items-center gap-6  md:gap-10 md:text-lg">
+      <nav className="hidden flex-row items-center  gap-6 md:flex md:gap-10 md:text-lg">
         <Link href="/">Home</Link>
         <Link href="/help/faq">FAQ</Link>
         {session ? (
@@ -42,6 +43,7 @@ function Navbar() {
           </>
         )}
       </nav>
+      <MobileNav session={session} />
     </header>
   );
 }
