@@ -1,10 +1,10 @@
-import { Session } from "@prisma/client";
+import type { Session } from "next-auth";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
 
 type Props = {
-  session: Session;
+  session: Session | null;
 };
 
 const MobileNav = ({ session }: Props) => {
