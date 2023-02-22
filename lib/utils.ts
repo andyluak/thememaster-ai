@@ -9,7 +9,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { Color } from "@prisma/client";
 import type { ClassValue } from "clsx";
 import { clsx } from "clsx";
 import * as R from "ramda";
@@ -26,7 +25,7 @@ const blobify = (data: unknown) => {
   )(data);
 };
 
-export const saveAsJson = (data: Color) => {
+export const saveAsJson = (data: unknown) => {
   const blob = blobify(data);
 
   const element = document.createElement("a");
