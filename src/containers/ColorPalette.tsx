@@ -27,10 +27,10 @@ const ColorPalette = ({ palette }: Props) => {
               const colorArray = colors[colorKey];
               return (
                 <div
-                  className="flex flex-row items-center gap-4"
+                  className="flex flex-row items-center gap-2 md:gap-4"
                   key={colorKey}
                 >
-                  <TypographyP className="min-w-[6rem] md:min-w-[8rem] font-semibold capitalize">
+                  <TypographyP className="min-w-[6rem] font-semibold capitalize md:min-w-[8rem]">
                     {colorKey}
                   </TypographyP>
                   {colorArray
