@@ -1,6 +1,5 @@
 import { getServerAuthSession } from "@/server/auth";
-import { prisma } from "@/server/db";
-import { ISimpleAiResponse } from "@/types";
+import type { ISimpleAiResponse } from "@/types";
 import {
   FREQUENCY_PENALTY,
   MAX_TOKENS,
