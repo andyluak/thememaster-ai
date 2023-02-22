@@ -1,5 +1,5 @@
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import {cn} from "lib/utils";
+import { cn } from "lib/utils";
 import { ChevronDown } from "lucide-react";
 import * as React from "react";
 
@@ -47,7 +47,7 @@ const AccordionContent = React.forwardRef<
   <AccordionPrimitive.Content
     ref={ref}
     className={cn(
-      "data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up md:text-md overflow-hidden  transition-all",
+      "md:text-md overflow-hidden transition-all data-[state=open]:animate-accordion-down  data-[state=closed]:animate-accordion-up",
       className
     )}
     {...props}

@@ -1,11 +1,11 @@
 import type { IAiResponseKey, PaletteWithColors } from "@/types";
+import { saveAsJson } from "lib/utils";
 import React from "react";
 
-import { TypographyH3, TypographyP } from "@/components/Typography";
+import { Button } from "@/components/Button";
 import PaletteTitle from "@/components/ColorPalette/PaletteTitle";
 import Shade from "@/components/ColorPalette/Shade";
-import { Button } from "@/components/Button";
-import { saveAsJson } from "lib/utils";
+import { TypographyH3, TypographyP } from "@/components/Typography";
 
 type Props = {
   palette: PaletteWithColors;
@@ -34,20 +34,22 @@ const ColorPalette = ({ palette }: Props) => {
                   return aNumber - bNumber;
                 })
                 .map((color) => {
-                  return (
-                    <Shade code={color.code} key={color.code} />
-                  );
+                  return <Shade code={color.code} key={color.code} />;
                 })}
             </div>
           );
         })}
       </div>
       <div className="flex flex-row gap-2">
-
-      <Button onClick={()=> saveAsJson(colors)} className="bg-accent text-xs">Save as JSON</Button>
-      <Button className="bg-accent text-xs">Tailwind Config</Button>
-      <Button className="bg-accent text-xs">CSS Config</Button>
-      <Button className="bg-accent text-xs">Duplicate</Button>
+        <Button
+          onClick={() => saveAsJson(colors)}
+          className="bg-accent text-xs"
+        >
+          Save as JSON
+        </Button>
+        <Button className="bg-accent text-xs">Tailwind Config</Button>
+        <Button className="bg-accent text-xs">CSS Config</Button>
+        <Button className="bg-accent text-xs">Duplicate</Button>
       </div>
     </div>
   );

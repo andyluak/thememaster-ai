@@ -1,12 +1,13 @@
+import clsx from "clsx";
+import { type NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+
 import {
   TypographyH1,
   TypographyH2,
   TypographyP,
 } from "@/components/Typography";
-import clsx from "clsx";
-import { type NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
 
 import content from "content/homepage.json";
 

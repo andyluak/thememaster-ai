@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   Accordion,
   AccordionContent,
@@ -5,7 +7,6 @@ import {
   AccordionTrigger,
 } from "@/components/Accordion";
 import { TypographyH1 } from "@/components/Typography";
-import React from "react";
 
 import faq from "content/faq.json";
 
@@ -27,7 +28,7 @@ const FAQ = ({ faq }: FAQProps) => {
           {faq.map((item, index) => (
             <AccordionItem value={item.question} key={item.question}>
               <AccordionTrigger>{item.question}</AccordionTrigger>
-              <AccordionContent className="text-slate-900 text-sm md:text-md">
+              <AccordionContent className="md:text-md text-sm text-slate-900">
                 {item.answer}
               </AccordionContent>
             </AccordionItem>

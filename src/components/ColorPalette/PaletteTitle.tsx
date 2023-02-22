@@ -1,14 +1,15 @@
-import React from 'react'
-import { TypographyH3 } from '../Typography'
+import React from "react";
+
+import { TypographyH3 } from "../Typography";
 
 type Props = {
-  name: string
-}
+  name: string;
+};
 
-const PaletteTitle = ({name}: Props) => {
+const PaletteTitle = ({ name }: Props) => {
   return (
-    <TypographyH3 className="text-lg md:text-xl mt-4">{name}</TypographyH3>
-  )
-}
+    <TypographyH3 className="mt-4 text-lg md:text-xl">{name}</TypographyH3>
+  );
+};
 
-export default PaletteTitle
+export default PaletteTitle;

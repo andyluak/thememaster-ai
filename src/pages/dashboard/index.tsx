@@ -94,9 +94,11 @@ const Palette = () => {
                 }
               </TypographyP>
             </div>
-            <Button variant={"subtle"} type="submit" className="bg-accent py-6"
+            <Button
+              variant={"subtle"}
+              type="submit"
+              className="bg-accent py-6"
               disabled={createPalette.isLoading}
-
             >
               {createPalette.isLoading ? "Generating..." : "Generate"}
             </Button>

@@ -1,11 +1,11 @@
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
-
 import "src/styles/globals.css";
+
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 const queryClient = new QueryClient();
 
