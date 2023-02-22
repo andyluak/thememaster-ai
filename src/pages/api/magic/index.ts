@@ -24,6 +24,11 @@ export async function magic(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
+  if( session.user.tokensLeft === 0 ) {
+    res.status(402).json({ message: "You have no tokens left." });
+    return;
+  } 
+
   const { prompt } = req.body as { prompt: string };
   const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
