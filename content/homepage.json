@@ -1,0 +1,26 @@
+{
+  "hero": {
+    "header": "Welcome to ThemeMaster AI",
+    "subheader": "the ultimate AI-powered theme generator for your design needs",
+    "paragraph": "Say goodbye to hours of brainstorming and testing different color schemes and themes for your projects. With ThemeMaster AI, you can generate stunning and unique designs in a matter of seconds."
+  },
+  "CTA": {
+    "header": "Ready to start creating stunning designs with ThemeMaster AI?",
+    "subheader": "With a ThemeMaster AI account, you can save your favourite colour palettes",
+    "button": "Sign up for a free account today !"
+  },
+  "benefits": [
+    {
+      "header": "Ensure consistency across your brand",
+      "subheader": "With ThemeMaster AI, you can create and save custom color palettes that reflect your brand's identity."
+    },
+    {
+      "header": "Speed up the design process",
+      "subheader": "Creating a color palette from scratch can be time-consuming and frustrating, especially if you're not experienced with color theory."
+    },
+    {
+      "header": "Explore new color schemes",
+      "subheader": "While it's important to maintain a consistent brand image, it's also important to keep your designs fresh and interesting."
+    }
+  ]
+}
