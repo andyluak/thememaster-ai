@@ -10,7 +10,7 @@ import {
 
 import ColorPalette from "@/containers/ColorPalette";
 
-import usePalettes from "@/queries/usePalette";
+import usePalettes from "@/queries/usePalettes";
 
 import useCreateAiPalette from "@/mutations/useCreateAiPalette";
 

@@ -1,25 +1,26 @@
 import type { PaletteWithColors } from "@/types";
 import { useQuery } from "@tanstack/react-query";
+import React from "react";
 
-function useResume(id: string) {
+function usePalettes() {
   const {
     isLoading,
     isError,
-    data: palette,
+    data: palettes,
   } = useQuery({
-    queryKey: ["resume", id],
+    queryKey: ["palettes"],
     queryFn: async () => {
-      const res = await fetch(`/api/palette/${id}`);
+      const res = await fetch(`/api/palette`);
 
       if (!res.ok) {
         throw new Error("Something went wrong");
       }
 
-      return res.json() as Promise<PaletteWithColors>;
+      return res.json() as Promise<PaletteWithColors[]>;
     },
   });
 
-  return { isLoading, isError, palette };
+  return { isLoading, isError, palettes };
 }
 
-export default useResume;
+export default usePalettes;
