@@ -15,10 +15,10 @@ interface ColorState {
 
 const useColorFormat = create<ColorState>((set) => ({
   colorFormat: {
-    primary: "rgb",
-    secondary: "rgb",
-    accent: "rgb",
-    foreground: "rgb",
+    primary: "hex",
+    secondary: "hex",
+    accent: "hex",
+    foreground: "hex",
   },
   setColorFormat: (key, value) => {
     set((state) => ({ colorFormat: { ...state.colorFormat, [key]: value } }));
