@@ -31,7 +31,7 @@ const SmartShadeHeader = ({ colorName }: Props) => {
             Autogenerate Shades
           </Label>
         </div>
-        <Select>
+        <Select value="hex">
           <SelectTrigger className="w-[60px] md:w-[80px]">
             <SelectValue placeholder="HEX" />
           </SelectTrigger>
