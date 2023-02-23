@@ -25,7 +25,7 @@ const SmartShadeHeader = ({ colorName }: Props) => {
         <div className="flex items-center space-x-2">
           <Switch id={`autogenerate-shades-${colorName}`} />
           <Label
-            className="md:text-md cursor-pointer text-xs"
+            className="md:text-base cursor-pointer text-xs"
             htmlFor={`autogenerate-shades-${colorName}`}
           >
             Autogenerate Shades
