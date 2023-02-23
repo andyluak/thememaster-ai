@@ -29,7 +29,7 @@ const SinglePalette = () => {
         Back
       </Link>
       <section className="mt-4 space-y-5 md:mt-8 md:space-y-8">
-        <TypographyH1>{name}</TypographyH1>
+        <TypographyH1 className="text-2xl md:text-4xl">{name}</TypographyH1>
         <div className="flex flex-col flex-wrap gap-10">
           {colorKeys.map((colorKey) => {
             const colorArray = colors[colorKey];

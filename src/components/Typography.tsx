@@ -9,7 +9,7 @@ type TypographyProps = {
 export function TypographyH1({ className, children }: TypographyProps) {
   return (
     <h1
-      className={clsx(
+      className={cn(
         "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl",
         className
       )}
@@ -46,5 +46,5 @@ export function TypographyH3({ className, children }: TypographyProps) {
 }
 
 export function TypographyP({ className, children }: TypographyProps) {
-  return <p className={clsx("", className)}>{children}</p>;
+  return <p className={cn("", className)}>{children}</p>;
 }
