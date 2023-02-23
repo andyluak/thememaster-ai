@@ -16,18 +16,12 @@ import SmartShade from "@/containers/SmartShade";
 import SmartShadeHeader from "@/containers/SmartShadeHeader";
 
 import usePalette from "@/queries/usePalette";
+import useColorFormat from "store/useColorFormat";
 
 const SinglePalette = () => {
   const { palette } = usePalette();
   const { name, colors } = palette as PaletteWithExtendedColors;
   const colorKeys = Object.keys(colors) as PaletteWithExtendedColorsKey[];
-
-  const [colorFormat, setColorFormat] = useState({
-    primary: "hex",
-    secondary: "hex",
-    accent: "hex",
-    foreground: "hex",
-  });
 
   return (
     <main className="p-full">
@@ -45,7 +39,7 @@ const SinglePalette = () => {
                 className="flex flex-col items-start gap-6 md:gap-8"
                 key={colorKey}
               >
-                <SmartShadeHeader colorName={colorKey} colorFormat={colorFormat} setColorFormat={setColorFormat}/>
+                <SmartShadeHeader colorName={colorKey}/>
                 <div className="flex flex-row gap-6 md:gap-4">
                   {colorArray
                     .sort((a, b) => {

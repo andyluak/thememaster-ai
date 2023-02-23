@@ -1,4 +1,5 @@
 import React from "react";
+import { ColorFormatKeys, ColorFormatValues } from "store/useColorFormat";
 
 import {
   Select,
@@ -9,24 +10,11 @@ import {
 } from "../Select";
 
 // declare the keys of the colorFormat object
-type ColorFormatKey = "primary" | "secondary" | "accent" | "foreground";
 
 type Props = {
-  colorName: ColorFormatKey;
-  colorFormat: {
-    primary: string;
-    secondary: string;
-    accent: string;
-    foreground: string;
-  };
-  setColorFormat: React.Dispatch<
-    React.SetStateAction<{
-      primary: string;
-      secondary: string;
-      accent: string;
-      foreground: string;
-    }>
-  >;
+  colorName: ColorFormatKeys;
+  colorFormat: Record<ColorFormatKeys, ColorFormatValues>;
+  setColorFormat: (key: ColorFormatKeys, value: ColorFormatValues) => void;
 };
 
 const ColorFormatSelect = ({
@@ -34,8 +22,8 @@ const ColorFormatSelect = ({
   colorFormat,
   setColorFormat,
 }: Props) => {
-  const handleChange = (value: string) => {
-    setColorFormat((prev) => ({ ...prev, [colorName]: value }));
+  const handleChange = (value: ColorFormatValues) => {
+    setColorFormat(colorName, value);
   };
 
   return (
