@@ -21,7 +21,7 @@ const SmartShadeHeader = ({ colorName }: Props) => {
       <TypographyP className="min-w-[6rem] font-semibold capitalize md:min-w-[8rem] md:text-xl">
         {colorName}
       </TypographyP>
-      <div className="flex flex-row items-center gap-4">
+      <div className="flex flex-row items-center gap-6">
         <div className="flex items-center space-x-2">
           <Switch id={`autogenerate-shades-${colorName}`} />
           <Label

@@ -39,7 +39,7 @@ const SinglePalette = () => {
                 key={colorKey}
               >
                 <SmartShadeHeader colorName={colorKey} />
-                <div className="flex flex-row gap-2 md:gap-4">
+                <div className="flex flex-row gap-6 md:gap-4">
                   {colorArray
                     .sort((a, b) => {
                       const aNumber = Number(a.name.split("-")[1]);
