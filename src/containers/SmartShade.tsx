@@ -23,7 +23,7 @@ const SmartShade = ({ color }: Props) => {
     <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:items-center">
       <Dialog>
         <DialogTrigger>
-          <button
+          <div
             className="h-8 w-8 rounded-full border border-gray-600 md:h-10 md:w-10"
             style={{ backgroundColor: code }}
             onClick={() => setIsOpen(!isOpen)}
@@ -36,7 +36,7 @@ const SmartShade = ({ color }: Props) => {
             onChange={(color) => console.log(color)}
           />
           <DialogDescription>
-            <TypographyP className="text-xs"> {code}</TypographyP>
+            {code}
           </DialogDescription>
         </DialogContent>
       </Dialog>
