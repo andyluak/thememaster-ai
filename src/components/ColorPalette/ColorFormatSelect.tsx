@@ -1,5 +1,9 @@
 import React from "react";
-import { ColorFormatKeys, ColorFormatValues } from "store/useColorFormat";
+import type {
+  ColorFormatKeys,
+  ColorFormatValues,
+} from "store/useColorFormat";
+import useColorFormat from "store/useColorFormat";
 
 import {
   Select,
@@ -9,25 +13,20 @@ import {
   SelectValue,
 } from "../Select";
 
-// declare the keys of the colorFormat object
-
 type Props = {
   colorName: ColorFormatKeys;
-  colorFormat: Record<ColorFormatKeys, ColorFormatValues>;
-  setColorFormat: (key: ColorFormatKeys, value: ColorFormatValues) => void;
 };
 
-const ColorFormatSelect = ({
-  colorName,
-  colorFormat,
-  setColorFormat,
-}: Props) => {
-  const handleChange = (value: ColorFormatValues) => {
-    setColorFormat(colorName, value);
-  };
+const ColorFormatSelect = ({ colorName }: Props) => {
+  const { colorFormat, setColorFormat } = useColorFormat((state) => state);
 
   return (
-    <Select value={colorFormat[colorName]} onValueChange={handleChange}>
+    <Select
+      value={colorFormat[colorName]}
+      onValueChange={(value: ColorFormatValues) =>
+        setColorFormat(colorName, value)
+      }
+    >
       <SelectTrigger className="w-[60px] md:w-[80px]">
         <SelectValue placeholder="HEX" />
       </SelectTrigger>

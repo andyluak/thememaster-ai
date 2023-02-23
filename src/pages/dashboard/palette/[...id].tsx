@@ -8,7 +8,6 @@ import { getPalette } from "lib/db";
 import { CornerDownLeft } from "lucide-react";
 import type { GetServerSideProps } from "next";
 import Link from "next/link";
-import React, { useState } from "react";
 
 import { TypographyH1 } from "@/components/Typography";
 
@@ -16,7 +15,6 @@ import SmartShade from "@/containers/SmartShade";
 import SmartShadeHeader from "@/containers/SmartShadeHeader";
 
 import usePalette from "@/queries/usePalette";
-import useColorFormat from "store/useColorFormat";
 
 const SinglePalette = () => {
   const { palette } = usePalette();
@@ -39,7 +37,7 @@ const SinglePalette = () => {
                 className="flex flex-col items-start gap-6 md:gap-8"
                 key={colorKey}
               >
-                <SmartShadeHeader colorName={colorKey}/>
+                <SmartShadeHeader colorName={colorKey} />
                 <div className="flex flex-row gap-6 md:gap-4">
                   {colorArray
                     .sort((a, b) => {
