@@ -1,5 +1,5 @@
-import type { Session } from "next-auth";
 import { Menu, X } from "lucide-react";
+import type { Session } from "next-auth";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -13,22 +13,18 @@ const MobileNav = ({ session }: Props) => {
   const closeModalOnClick = () => setIsOpen(false);
 
   return (
-    <div className="md:hidden">
+    <div className="z-50 md:hidden">
       <button onClick={() => setIsOpen(true)}>
         <Menu />
         <p className="sr-only">Open menu</p>
       </button>
       {isOpen && (
-        <div className="p-full absolute top-5 left-0 flex h-1/2 w-full flex-col items-end space-y-6 bg-white">
+        <div className="p-full absolute top-5 left-0 flex h-screen w-full flex-col items-end space-y-6 bg-white">
           <button onClick={() => setIsOpen(false)}>
             <p className="sr-only">Close menu</p>
             <X />
           </button>
-          <Link
-            href="/"
-            className="text-xl"
-            onClick={closeModalOnClick}
-          >
+          <Link href="/" className="text-xl" onClick={closeModalOnClick}>
             Home
           </Link>
           {session ? (
