@@ -67,7 +67,7 @@ const Palette = () => {
           >
             <div className="space-y-2">
               <Input
-                className="text-md border-gray-400 py-6"
+                className="text-base border-gray-400 py-6"
                 type="text"
                 placeholder="Write your prompt"
                 name="prompt"
