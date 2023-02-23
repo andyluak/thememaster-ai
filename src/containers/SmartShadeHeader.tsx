@@ -17,7 +17,7 @@ type Props = {
 
 const SmartShadeHeader = ({ colorName }: Props) => {
   return (
-    <div className="flex w-full flex-row items-center justify-between md:w-[55%]">
+    <div className="flex w-[95%] flex-row items-center justify-between md:w-[55%]">
       <TypographyP className="min-w-[6rem] font-semibold capitalize md:min-w-[8rem] md:text-xl">
         {colorName}
       </TypographyP>
@@ -25,7 +25,7 @@ const SmartShadeHeader = ({ colorName }: Props) => {
         <div className="flex items-center space-x-2">
           <Switch id={`autogenerate-shades-${colorName}`} />
           <Label
-            className="md:text-base cursor-pointer text-xs"
+            className="cursor-pointer text-xs md:text-base"
             htmlFor={`autogenerate-shades-${colorName}`}
           >
             Autogenerate Shades
