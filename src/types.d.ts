@@ -1,4 +1,4 @@
-import type { Palette } from "@prisma/client";
+import type { Color, Palette } from "@prisma/client";
 
 export type ISimpleAiResponse = {
   primary: string[];
@@ -32,3 +32,14 @@ export type IAiResponseKey = keyof IAiResponse;
 export type PaletteWithColors = Palette & {
   colors: IAiResponse;
 };
+
+export type PaletteWithExtendedColors = Palette & {
+  colors: {
+    primary: Color[];
+    secondary: Color[];
+    accent: Color[];
+    foreground: Color[];
+  };
+};
+
+export type PaletteWithExtendedColorsKey = keyof PaletteWithExtendedColors["colors"];

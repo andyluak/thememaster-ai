@@ -1,4 +1,4 @@
-import type { PaletteWithColors } from "@/types";
+import type { PaletteWithColors, PaletteWithExtendedColors } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
@@ -20,7 +20,7 @@ function usePalette() {
         throw new Error("Something went wrong");
       }
 
-      return res.json() as Promise<PaletteWithColors>;
+      return res.json() as Promise<PaletteWithExtendedColors>;
     },
   });
 
