@@ -8,7 +8,7 @@ import { getPalette } from "lib/db";
 import { CornerDownLeft } from "lucide-react";
 import type { GetServerSideProps } from "next";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 import { TypographyH1 } from "@/components/Typography";
 
@@ -21,6 +21,13 @@ const SinglePalette = () => {
   const { palette } = usePalette();
   const { name, colors } = palette as PaletteWithExtendedColors;
   const colorKeys = Object.keys(colors) as PaletteWithExtendedColorsKey[];
+
+  const [colorFormat, setColorFormat] = useState({
+    primary: "hex",
+    secondary: "hex",
+    accent: "hex",
+    foreground: "hex",
+  });
 
   return (
     <main className="p-full">
@@ -38,7 +45,7 @@ const SinglePalette = () => {
                 className="flex flex-col items-start gap-6 md:gap-8"
                 key={colorKey}
               >
-                <SmartShadeHeader colorName={colorKey} />
+                <SmartShadeHeader colorName={colorKey} colorFormat={colorFormat} setColorFormat={setColorFormat}/>
                 <div className="flex flex-row gap-6 md:gap-4">
                   {colorArray
                     .sort((a, b) => {

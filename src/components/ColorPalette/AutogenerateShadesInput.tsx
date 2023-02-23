@@ -3,7 +3,7 @@ import { Label } from '../Label'
 import { Switch } from '../Switch'
 
 type Props = {
-  id: string
+  id: string;
 }
 
 const AutogenerateShadesInput = ({id}: Props) => {
