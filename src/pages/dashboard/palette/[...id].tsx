@@ -1,4 +1,8 @@
+import type { PaletteWithColors } from "@/types";
+import { QueryClient, dehydrate } from "@tanstack/react-query";
+import { getPalette } from "lib/db";
 import { CornerDownLeft } from "lucide-react";
+import type { GetServerSideProps } from "next";
 import Link from "next/link";
 import React from "react";
 
@@ -7,16 +11,8 @@ import { TypographyH1 } from "@/components/Typography";
 import usePalette from "@/queries/usePalette";
 
 const SinglePalette = () => {
-  const { palette, isLoading, isError } = usePalette();
+  const { palette } = usePalette();
   const { name } = palette || {};
-
-  if (isLoading) {
-    return <div className="p-full">Loading...</div>;
-  }
-
-  if (isError) {
-    return <div className="p-full">Error</div>;
-  }
 
   return (
     <main className="p-full">
@@ -29,6 +25,21 @@ const SinglePalette = () => {
       </section>
     </main>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { id } = context.query as { id: string[] };
+  const queryClient = new QueryClient();
+  await queryClient.fetchQuery(["palette", id[0]], async () => {
+    const palette = await getPalette(id);
+    return JSON.parse(JSON.stringify(palette)) as PaletteWithColors;
+  });
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
 };
 
 export default SinglePalette;

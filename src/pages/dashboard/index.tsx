@@ -1,3 +1,8 @@
+import { prisma } from "@/server/db";
+import type { PaletteWithColors } from "@/types";
+import { QueryClient, dehydrate } from "@tanstack/react-query";
+import { getPalettes } from "lib/db";
+import type { GetServerSideProps } from "next";
 import React from "react";
 
 import { Button } from "@/components/Button";
@@ -17,30 +22,9 @@ import useCreateAiPalette from "@/mutations/useCreateAiPalette";
 import useUser from "@/hooks/useUser";
 
 const Palette = () => {
-  const { isLoading, isError, palettes = [] } = usePalettes();
+  const { palettes = [] } = usePalettes();
   const { user } = useUser();
   const createPalette = useCreateAiPalette();
-  if (isLoading) {
-    return (
-      <main>
-        <section className="p-full">
-          {/* TODO ADD LOADING */}
-          <TypographyH1>Loading...</TypographyH1>
-        </section>
-      </main>
-    );
-  }
-
-  if (isError) {
-    return (
-      <main>
-        <section className="p-full">
-          {/* TODO ADD ERROR */}
-          <TypographyH1>Something went wrong</TypographyH1>
-        </section>
-      </main>
-    );
-  }
 
   const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -118,6 +102,43 @@ const Palette = () => {
       </section>
     </main>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = context.req.headers.cookie || "";
+
+  if (!cookies) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  const sessionToken = cookies
+    ?.split("next-auth.session-token=")[1]
+    ?.split(";")[0];
+
+  // do a db query to get the user based on the session token
+  const { userId } = (await prisma.session.findFirst({
+    where: {
+      sessionToken,
+    },
+    select: {
+      userId: true,
+    },
+  })) as { userId: string };
+  const queryClient = new QueryClient();
+  await queryClient.fetchQuery(["palettes"], async () => {
+    const palettes = await getPalettes(userId);
+    return JSON.parse(JSON.stringify(palettes)) as PaletteWithColors[];
+  });
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
 };
 
 export default Palette;

@@ -4,18 +4,16 @@ import { useRouter } from "next/router";
 
 function usePalette() {
   const router = useRouter();
-  const { id = '' } = router.query;
+  const { id = "" } = router.query;
   const {
     isLoading,
     isError,
     data: palette,
   } = useQuery({
-    queryKey: ["palette", id],
+    queryKey: ["palette", id[0]],
     queryFn: async (context) => {
       const { queryKey } = context;
-      const [, id] = queryKey;
-      
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      const [, id] = queryKey as [string, string];
       const res = await fetch(`/api/palette/${id}`);
 
       if (!res.ok) {
