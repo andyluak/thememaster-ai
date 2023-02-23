@@ -17,7 +17,7 @@ type Props = {
 
 const SmartShadeHeader = ({ colorName }: Props) => {
   return (
-    <div className="flex w-[95%] flex-row items-center justify-between md:w-[55%]">
+    <div className="flex w-[95%] flex-row items-center justify-between md:w-1/2">
       <TypographyP className="min-w-[6rem] font-semibold capitalize md:min-w-[8rem] md:text-xl">
         {colorName}
       </TypographyP>
