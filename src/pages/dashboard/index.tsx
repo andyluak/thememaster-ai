@@ -3,6 +3,7 @@ import type { PaletteWithColors } from "@/types";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { getPalettes } from "lib/db";
 import type { GetServerSideProps } from "next";
+import Head from "next/head";
 import React from "react";
 
 import { Button } from "@/components/Button";
@@ -19,12 +20,8 @@ import usePalettes from "@/queries/usePalettes";
 
 import useCreateAiPalette from "@/mutations/useCreateAiPalette";
 
-import useUser from "@/hooks/useUser";
-import Head from "next/head";
-
-const Palette = () => {
+const Palette = ({ tokensLeft }: { tokensLeft: number }) => {
   const { palettes = [] } = usePalettes();
-  const { user } = useUser();
   const createPalette = useCreateAiPalette();
 
   const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -53,7 +50,7 @@ const Palette = () => {
           <div className="space-y-2">
             <TypographyH1>Welcome to your dashboard!</TypographyH1>
             <TypographyP className="text-slate-600">
-              You have {user?.tokensLeft} color pallete tokens left.
+              You have {tokensLeft} color pallete tokens left.
             </TypographyP>
           </div>
           {palettes?.length === 0 && (
@@ -76,7 +73,7 @@ const Palette = () => {
           >
             <div className="space-y-2">
               <Input
-                className="text-base border-gray-400 py-6"
+                className="border-gray-400 py-6 text-base"
                 type="text"
                 placeholder="Write your prompt"
                 name="prompt"
@@ -137,6 +134,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       userId: true,
     },
   })) as { userId: string };
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      tokensLeft: true,
+    },
+  });
   const queryClient = new QueryClient();
   await queryClient.fetchQuery(["palettes"], async () => {
     const palettes = await getPalettes(userId);
@@ -146,6 +151,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
+      tokensLeft: user?.tokensLeft,
     },
   };
 };
