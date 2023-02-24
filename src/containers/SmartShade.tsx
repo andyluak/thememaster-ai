@@ -47,9 +47,12 @@ const SmartShade = ({ color, paletteId }: Props) => {
       return `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`;
     }
   };
+
+  const formattedColor = newColorFormat(code);
+
   const { toast } = useToast();
   const copyToClipboard = async () => {
-    await navigator.clipboard.writeText(code);
+    await navigator.clipboard.writeText(formattedColor);
     toast({
       title: "Copied to clipboard",
       description: "The color code has been copied to your clipboard",
@@ -76,7 +79,7 @@ const SmartShade = ({ color, paletteId }: Props) => {
         </DialogContent>
       </Dialog>
       <button onClick={copyToClipboard}>
-        <TypographyP className="text-xs">{newColorFormat(code)}</TypographyP>
+        <TypographyP className="text-xs">{formattedColor}</TypographyP>
       </button>
     </div>
   );
