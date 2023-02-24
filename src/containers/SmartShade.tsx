@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import type { Color } from "@prisma/client";
 import { rgbToHsl } from "lib/colors";
 import React from "react";
@@ -13,6 +14,8 @@ import {
   DialogTrigger,
 } from "@/components/Dialog";
 import { TypographyP } from "@/components/Typography";
+
+import { useToast } from "@/hooks/useToast";
 
 type Props = {
   color: Color;
@@ -44,6 +47,14 @@ const SmartShade = ({ color, paletteId }: Props) => {
       return `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`;
     }
   };
+  const { toast } = useToast();
+  const copyToClipboard = async () => {
+    await navigator.clipboard.writeText(code);
+    toast({
+      title: "Copied to clipboard",
+      description: "The color code has been copied to your clipboard",
+    });
+  };
 
   return (
     <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:items-center">
@@ -64,7 +75,9 @@ const SmartShade = ({ color, paletteId }: Props) => {
           <DialogDescription>{code}</DialogDescription>
         </DialogContent>
       </Dialog>
-      <TypographyP className="text-xs">{newColorFormat(code)}</TypographyP>
+      <button onClick={copyToClipboard}>
+        <TypographyP className="text-xs">{newColorFormat(code)}</TypographyP>
+      </button>
     </div>
   );
 };

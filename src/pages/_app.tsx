@@ -12,6 +12,7 @@ import "src/styles/globals.css";
 
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { Toaster } from "@/components/Toaster";
 
 const MyApp: AppType<{
   session: Session | null;
@@ -36,6 +37,7 @@ const MyApp: AppType<{
         <SessionProvider session={session}>
           <Navbar />
           <Component {...pageProps} />
+          <Toaster />
           <Footer />
         </SessionProvider>
       </Hydrate>
