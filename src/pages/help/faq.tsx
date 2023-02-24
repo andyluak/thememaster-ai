@@ -28,7 +28,7 @@ const FAQ = ({ faq }: FAQProps) => {
           {faq.map((item, index) => (
             <AccordionItem value={item.question} key={item.question}>
               <AccordionTrigger>{item.question}</AccordionTrigger>
-              <AccordionContent className="md:text-base text-sm text-slate-900">
+              <AccordionContent className="text-sm text-slate-900 md:text-base">
                 {item.answer}
               </AccordionContent>
             </AccordionItem>

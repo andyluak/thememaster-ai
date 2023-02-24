@@ -42,4 +42,5 @@ export type PaletteWithExtendedColors = Palette & {
   };
 };
 
-export type PaletteWithExtendedColorsKey = keyof PaletteWithExtendedColors["colors"];
+export type PaletteWithExtendedColorsKey =
+  keyof PaletteWithExtendedColors["colors"];
