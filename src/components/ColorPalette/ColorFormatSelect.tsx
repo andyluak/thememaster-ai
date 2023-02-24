@@ -1,8 +1,5 @@
 import React from "react";
-import type {
-  ColorFormatKeys,
-  ColorFormatValues,
-} from "store/useColorFormat";
+import type { ColorFormatKeys, ColorFormatValues } from "store/useColorFormat";
 import useColorFormat from "store/useColorFormat";
 
 import {
@@ -15,16 +12,28 @@ import {
 
 type Props = {
   colorName: ColorFormatKeys;
+  paletteId: string;
 };
 
-const ColorFormatSelect = ({ colorName }: Props) => {
-  const { colorFormat, setColorFormat } = useColorFormat((state) => state);
-
+const ColorFormatSelect = ({ colorName, paletteId }: Props) => {
+  const { colorFormat } = useColorFormat((state) => {
+    return (
+      state.palettes.find((palette) => palette.id === paletteId) || {
+        colorFormat: {
+          primary: "hex",
+          secondary: "hex",
+          accent: "hex",
+          foreground: "hex",
+        },
+      }
+    );
+  });
+  const setColorFormat = useColorFormat((state) => state.setColorFormat);
   return (
     <Select
       value={colorFormat[colorName]}
       onValueChange={(value: ColorFormatValues) =>
-        setColorFormat(colorName, value)
+        setColorFormat(paletteId, colorName, value)
       }
     >
       <SelectTrigger className="w-[60px] md:w-[80px]">

@@ -1,6 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+//@ts-nocheck
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import type { Color } from "@prisma/client";
 import React from "react";
 import { HexColorPicker } from "react-colorful";
+import useColorFormat, { ColorFormatKeys } from "store/useColorFormat";
 
 import {
   Dialog,
@@ -15,8 +21,10 @@ type Props = {
   color: Color;
 };
 
+
+
 const SmartShade = ({ color }: Props) => {
-  const { code } = color;
+  const { code, name } = color;
   const [isOpen, setIsOpen] = React.useState(false);
   return (
     <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:items-center">
@@ -34,9 +42,7 @@ const SmartShade = ({ color }: Props) => {
             color={code}
             onChange={(color) => console.log(color)}
           />
-          <DialogDescription>
-            {code}
-          </DialogDescription>
+          <DialogDescription>{code}</DialogDescription>
         </DialogContent>
       </Dialog>
       <TypographyP className="text-xs">{code}</TypographyP>

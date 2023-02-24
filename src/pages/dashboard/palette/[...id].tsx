@@ -18,7 +18,7 @@ import usePalette from "@/queries/usePalette";
 
 const SinglePalette = () => {
   const { palette } = usePalette();
-  const { name, colors } = palette as PaletteWithExtendedColors;
+  const { name, colors, id } = palette as PaletteWithExtendedColors;
   const colorKeys = Object.keys(colors) as PaletteWithExtendedColorsKey[];
 
   return (
@@ -37,7 +37,7 @@ const SinglePalette = () => {
                 className="flex flex-col items-start gap-6 md:gap-8"
                 key={colorKey}
               >
-                <SmartShadeHeader colorName={colorKey} />
+                <SmartShadeHeader colorName={colorKey} paletteId={id} />
                 <div className="flex flex-row gap-6 md:gap-4">
                   {colorArray
                     .sort((a, b) => {

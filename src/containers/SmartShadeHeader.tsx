@@ -7,9 +7,10 @@ import { TypographyP } from "@/components/Typography";
 
 type Props = {
   colorName: ColorFormatKeys;
+  paletteId: string;
 };
 
-const SmartShadeHeader = ({ colorName }: Props) => {
+const SmartShadeHeader = ({ colorName, paletteId }: Props) => {
   return (
     <div className="flex w-[95%] flex-row items-center justify-between md:w-1/2">
       <TypographyP className="min-w-[6rem] font-semibold capitalize md:min-w-[8rem] md:text-xl">
@@ -17,7 +18,7 @@ const SmartShadeHeader = ({ colorName }: Props) => {
       </TypographyP>
       <div className="flex flex-row items-center gap-6">
         <AutogenerateShadesInput id={`autogenerate-shades-${colorName}`} />
-        <ColorFormatSelect colorName={colorName} />
+        <ColorFormatSelect colorName={colorName} paletteId={paletteId} />
       </div>
     </div>
   );
