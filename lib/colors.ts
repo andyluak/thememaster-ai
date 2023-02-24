@@ -40,3 +40,42 @@ export const rgb2hex = (rgb: { r: number; g: number; b: number }) => {
     "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
   return hex;
 };
+
+export const rgbToHsl = (
+  r: number,
+  g: number,
+  b: number
+): [number, number, number] => {
+  // Convert to 0 to 1 range
+  (r /= 255), (g /= 255), (b /= 255);
+
+  // Get the max and min of the RGB values
+  const max = Math.max(r, g, b),
+    min = Math.min(r, g, b);
+
+  // Initialize the hue and saturation
+  let h = 0,
+    s;
+
+  // Calculate the hue
+  if (max === min) h = 0;
+  else if (r === max) h = (g - b) / (max - min);
+  else if (g === max) h = 2 + (b - r) / (max - min);
+  else if (b === max) h = 4 + (r - g) / (max - min);
+
+  // Convert to degrees
+  h = Math.min(h * 60, 360);
+
+  // Convert negative hues to positive equivalent
+  if (h < 0) h += 360;
+
+  // Calculate the lightness
+  const l = (min + max) / 2;
+
+  // Calculate the saturation
+  if (max === min) s = 0;
+  else s = (max - min) / (1 - Math.abs(2 * l - 1));
+
+  // Format and return the result
+  return [Math.round(h), Math.round(s * 100), Math.round(l * 100)];
+};

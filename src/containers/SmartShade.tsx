@@ -1,4 +1,5 @@
 import type { Color } from "@prisma/client";
+import { rgbToHsl } from "lib/colors";
 import React from "react";
 import { HexColorPicker } from "react-colorful";
 import {
@@ -28,7 +29,23 @@ const SmartShade = ({ color, paletteId }: Props) => {
     name.split("-")[0] as ColorFormatKeys
   );
 
-  
+  const newColorFormat = (color: string) => {
+    const newColor = color.replace("#", "");
+    if (colorFormatValue === "hex") {
+      return color;
+    } else if (colorFormatValue === "rgb") {
+      const r = parseInt(newColor.substring(0, 2), 16);
+      const g = parseInt(newColor.substring(2, 4), 16);
+      const b = parseInt(newColor.substring(4, 6), 16);
+      return `rgb(${r}, ${g}, ${b})`;
+    } else {
+      const r = parseInt(newColor.substring(0, 2), 16);
+      const g = parseInt(newColor.substring(2, 4), 16);
+      const b = parseInt(newColor.substring(4, 6), 16);
+      const hsl = rgbToHsl(r, g, b);
+      return `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`;
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:items-center">
@@ -49,7 +66,7 @@ const SmartShade = ({ color, paletteId }: Props) => {
           <DialogDescription>{code}</DialogDescription>
         </DialogContent>
       </Dialog>
-      <TypographyP className="text-xs">{code}</TypographyP>
+      <TypographyP className="text-xs">{newColorFormat(code)}</TypographyP>
     </div>
   );
 };

@@ -12,7 +12,7 @@ type Props = {
 
 const SmartShadeHeader = ({ colorName, paletteId }: Props) => {
   return (
-    <div className="flex w-[95%] flex-row items-center justify-between md:w-1/2">
+    <div className="flex w-[95%] flex-row items-center justify-between md:w-full lg:w-2/3 xl:w-3/4">
       <TypographyP className="min-w-[6rem] font-semibold capitalize md:min-w-[8rem] md:text-xl">
         {colorName}
       </TypographyP>
