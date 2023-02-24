@@ -18,6 +18,18 @@ interface ColorState {
     key: ColorFormatKeys,
     value: ColorFormatValues
   ) => void;
+
+  getPaletteColorFormat: (id: string) => {
+    primary: ColorFormatValues;
+    secondary: ColorFormatValues;
+    accent: ColorFormatValues;
+    foreground: ColorFormatValues;
+  };
+
+  getPaletteColorFormatValue: (
+    id: string,
+    key: ColorFormatKeys
+  ) => ColorFormatValues;
 }
 
 const useColorFormat = create<ColorState>((set, get) => ({
@@ -70,6 +82,23 @@ const useColorFormat = create<ColorState>((set, get) => ({
       foreground: "hex",
     };
   },
+
+  getPaletteColorFormatValue: (id: string, key: ColorFormatKeys) => {
+    const state = get();
+    const palette = state.palettes.find((p) => p.id === id);
+    if (palette) {
+      return palette.colorFormat[key];
+    }
+    return "hex";
+  },
 }));
+
+export const usePaletteColorFormatValue = (
+  id: string,
+  key: ColorFormatKeys
+) => {
+  const { getPaletteColorFormatValue } = useColorFormat();
+  return getPaletteColorFormatValue(id, key);
+};
 
 export default useColorFormat;

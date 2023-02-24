@@ -46,7 +46,7 @@ const SinglePalette = () => {
                       return aNumber - bNumber;
                     })
                     .map((color) => {
-                      return <SmartShade color={color} key={color.code} />;
+                      return <SmartShade color={color} key={color.code} paletteId={id}/>;
                     })}
                 </div>
               </div>

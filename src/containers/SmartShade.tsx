@@ -1,12 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
-//@ts-nocheck
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import type { Color } from "@prisma/client";
 import React from "react";
 import { HexColorPicker } from "react-colorful";
-import useColorFormat, { ColorFormatKeys } from "store/useColorFormat";
+import {
+  ColorFormatKeys,
+  usePaletteColorFormatValue,
+} from "store/useColorFormat";
 
 import {
   Dialog,
@@ -19,13 +17,19 @@ import { TypographyP } from "@/components/Typography";
 
 type Props = {
   color: Color;
+  paletteId: string;
 };
 
-
-
-const SmartShade = ({ color }: Props) => {
+const SmartShade = ({ color, paletteId }: Props) => {
   const { code, name } = color;
   const [isOpen, setIsOpen] = React.useState(false);
+  const colorFormatValue = usePaletteColorFormatValue(
+    paletteId,
+    name.split("-")[0] as ColorFormatKeys
+  );
+
+  
+
   return (
     <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:items-center">
       <Dialog>

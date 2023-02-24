@@ -18,10 +18,11 @@ const fullHex = (hex: string) => {
   const r = getHalfHexValue(hex, 1, 2);
   const g = getHalfHexValue(hex, 2, 3);
   const b = getHalfHexValue(hex, 3, 4);
-  return { r, g, b };
+  return { r, g, b, css: `rgb(${r}, ${g}, ${b})` };
 };
 
-export const hex2rgb = (hex: string) => {
+export const hex2rgb = (cssHex: string) => {
+  const hex = cssHex.replace("#", "");
   if (hex.length === 4) {
     return fullHex(hex);
   }
@@ -30,7 +31,7 @@ export const hex2rgb = (hex: string) => {
   const g = getHexValue(hex, 3, 5);
   const b = getHexValue(hex, 5, 7);
 
-  return { r, g, b };
+  return { r, g, b, css: `rgb(${r}, ${g}, ${b})` };
 };
 
 export const rgb2hex = (rgb: { r: number; g: number; b: number }) => {
