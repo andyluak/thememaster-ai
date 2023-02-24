@@ -7,6 +7,7 @@ import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { getPalette } from "lib/db";
 import { CornerDownLeft } from "lucide-react";
 import type { GetServerSideProps } from "next";
+import Head from "next/head";
 import Link from "next/link";
 
 import { TypographyH1 } from "@/components/Typography";
@@ -23,6 +24,14 @@ const SinglePalette = () => {
 
   return (
     <main className="p-full">
+      <Head>
+        <title>{palette?.name} - ThemeMaster AI</title>
+        <meta
+          name="description"
+          content="best theme builder app powered by AI"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Link href={"/dashboard"} className="flex flex-row items-center gap-2">
         <CornerDownLeft />
         Back
@@ -46,7 +55,13 @@ const SinglePalette = () => {
                       return aNumber - bNumber;
                     })
                     .map((color) => {
-                      return <SmartShade color={color} key={color.code} paletteId={id}/>;
+                      return (
+                        <SmartShade
+                          color={color}
+                          key={color.code}
+                          paletteId={id}
+                        />
+                      );
                     })}
                 </div>
               </div>

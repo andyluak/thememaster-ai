@@ -20,6 +20,7 @@ import usePalettes from "@/queries/usePalettes";
 import useCreateAiPalette from "@/mutations/useCreateAiPalette";
 
 import useUser from "@/hooks/useUser";
+import Head from "next/head";
 
 const Palette = () => {
   const { palettes = [] } = usePalettes();
@@ -39,6 +40,14 @@ const Palette = () => {
 
   return (
     <main>
+      <Head>
+        <title>Palettes - ThemeMaster AI</title>
+        <meta
+          name="description"
+          content="best theme builder app powered by AI"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <section className="p-full flex flex-col gap-16">
         <div className="flex flex-col gap-6">
           <div className="space-y-2">
