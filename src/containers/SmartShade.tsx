@@ -8,6 +8,7 @@ import { usePaletteColorFormatValue } from "store/useColorOptions";
 import type { Shade } from "store/useColorShades";
 import useColorShades from "store/useColorShades";
 
+import { Button } from "@/components/Button";
 import {
   Dialog,
   DialogContent,
@@ -71,22 +72,36 @@ const SmartShade = ({ color, paletteId }: Props) => {
     return colorCode || code;
   }) as Shade;
 
+  const handleShadeChange = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:items-center">
-      <Dialog>
+      <Dialog open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
         <DialogTrigger>
           <div
             className="h-8 w-8 rounded-full border border-gray-600 md:h-10 md:w-10"
             style={{ backgroundColor: code }}
-            onClick={() => setIsOpen(!isOpen)}
           />
         </DialogTrigger>
         <DialogContent>
           <DialogTitle>Select a new shade</DialogTitle>
-          <HexColorPicker
-            color={temporaryShade}
-            onChange={(color) => setTemporaryShade(color)}
-          />
+          <div className="space-y-4">
+            <HexColorPicker
+              color={temporaryShade}
+              onChange={(color) => setTemporaryShade(color)}
+            />
+            <Button
+              variant={"subtle"}
+              type="button"
+              className="bg-accent py-3"
+              onClick={handleShadeChange}
+            >
+              Save shade
+            </Button>
+          </div>
+
           <DialogDescription>{temporaryShade}</DialogDescription>
         </DialogContent>
       </Dialog>
