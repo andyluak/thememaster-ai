@@ -32,6 +32,15 @@ const SmartShade = ({ color, paletteId }: Props) => {
     paletteId,
     name.split("-")[0] as ColorFormatKeys
   );
+  const temporaryShade = useColorShades((state) => state.temporaryShade);
+  const setTemporaryShade = useColorShades((state) => state.setTemporaryShade);
+  const setShade = useColorShades((state) => state.setShade);
+  const shade = useColorShades((state) => {
+    const palette = state.palettes.find((palette) => palette.id === paletteId);
+    const colorCode =
+      palette?.shades.find((shade) => shade.name === name) || "";
+    return colorCode;
+  }) as Shade;
 
   const newColorFormat = (color: string) => {
     const newColor = color.replace("#", "");
@@ -51,6 +60,14 @@ const SmartShade = ({ color, paletteId }: Props) => {
     }
   };
 
+  const formattedColor = newColorFormat(shade?.code ?? code);
+
+  const handleShadeChange = () => {
+    setIsOpen(false);
+    setTemporaryShade("#000000");
+    setShade(paletteId, name, temporaryShade);
+  };
+
   const { toast } = useToast();
   const copyToClipboard = async () => {
     await navigator.clipboard.writeText(formattedColor);
@@ -59,22 +76,6 @@ const SmartShade = ({ color, paletteId }: Props) => {
       description: "The color code has been copied to your clipboard",
     });
   };
-  const temporaryShade = useColorShades((state) => state.temporaryShade);
-  const setTemporaryShade = useColorShades((state) => state.setTemporaryShade);
-  const setShade = useColorShades((state) => state.setShade);
-  const shade = useColorShades((state) => {
-    const palette = state.palettes.find((palette) => palette.id === paletteId);
-    const colorCode =
-      palette?.shades.find((shade) => shade.name === name) || "";
-    return colorCode;
-  }) as Shade;
-
-  const handleShadeChange = () => {
-    setIsOpen(false);
-    setTemporaryShade("#000000");
-    setShade(paletteId, name, temporaryShade);
-  };
-  const formattedColor = newColorFormat(shade?.code ?? code);
 
   return (
     <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:items-center">
