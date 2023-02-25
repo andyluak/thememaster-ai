@@ -10,15 +10,15 @@ import { CornerDownLeft } from "lucide-react";
 import type { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
+import { Button } from "@/components/Button";
 import { TypographyH1 } from "@/components/Typography";
 
 import SmartShade from "@/containers/SmartShade";
 import SmartShadeHeader from "@/containers/SmartShadeHeader";
 
 import usePalette from "@/queries/usePalette";
-import { Button } from "@/components/Button";
-import { useRouter } from "next/router";
 
 const SinglePalette = () => {
   const router = useRouter();
@@ -28,7 +28,7 @@ const SinglePalette = () => {
 
   const handlePaletteSave = async () => {
     await router.push("/dashboard");
-  }
+  };
 
   return (
     <main className="p-full">
@@ -79,7 +79,7 @@ const SinglePalette = () => {
         <Button
           variant={"subtle"}
           type="button"
-          className="bg-accent py-3 text-sm md:text-base md:py-6 px-6"
+          className="bg-accent py-3 px-6 text-sm md:py-6 md:text-base"
           onClick={handlePaletteSave}
         >
           Save palette
