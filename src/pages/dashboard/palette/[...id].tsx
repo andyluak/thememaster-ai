@@ -5,7 +5,7 @@ import type {
   PaletteWithExtendedColors,
   PaletteWithExtendedColorsKey,
 } from "@/types";
-import { Color } from "@prisma/client";
+import type { Color } from "@prisma/client";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { getPalette } from "lib/db";
 import { CornerDownLeft } from "lucide-react";
