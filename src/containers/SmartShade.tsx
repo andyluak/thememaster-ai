@@ -27,11 +27,14 @@ type Props = {
 
 const SmartShade = ({ color, paletteId }: Props) => {
   const { code, name } = color;
+
   const [isOpen, setIsOpen] = React.useState(false);
+
   const colorFormatValue = usePaletteColorFormatValue(
     paletteId,
     name.split("-")[0] as ColorFormatKeys
   );
+
   const temporaryShade = useColorShades((state) => state.temporaryShade);
   const setTemporaryShade = useColorShades((state) => state.setTemporaryShade);
   const setShade = useColorShades((state) => state.setShade);
