@@ -1,13 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
 /* eslint-disable @typescript-eslint/no-misused-promises */
 // @ts-nocheck
 import type {
@@ -15,6 +5,7 @@ import type {
   PaletteWithExtendedColors,
   PaletteWithExtendedColorsKey,
 } from "@/types";
+import { Color } from "@prisma/client";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { getPalette } from "lib/db";
 import { CornerDownLeft } from "lucide-react";
@@ -44,9 +35,9 @@ const SinglePalette = () => {
     };
     shades.map((shade) => {
       const shadeParent = shade.name.split("-")[0]!;
-      const toMergeWith = palette?.colors?.[shadeParent];
+      const toMergeWith = palette?.colors?.[shadeParent] as Color[];
 
-      const merged = toMergeWith.map((color) => {
+      const merged = toMergeWith.map((color: Color) => {
         if (color.name !== shade.name) return color;
         return {
           ...color,
@@ -58,7 +49,7 @@ const SinglePalette = () => {
         [shadeParent]: merged,
       };
     });
-    const newPalette = { ...palette, colors: newColors };
+    const newPalette = { ...palette, colors: newColors } as PaletteWithColors;
     // await router.push("/dashboard");
   };
 
