@@ -79,3 +79,17 @@ export const rgbToHsl = (
   // Format and return the result
   return [Math.round(h), Math.round(s * 100), Math.round(l * 100)];
 };
+
+export const hslToRgb = (h: number, s: number, l: number): number[] => {
+  s /= 100;
+  l /= 100;
+  const k = (n: number): number => (n + h / 30) % 12;
+  const a = s * Math.min(l, 1 - l);
+  const f = (n: number): number =>
+    l - a * Math.max(Math.min(k(n) - 3, 9 - k(n), 1), -1);
+  return [
+    Math.round(255 * f(0)),
+    Math.round(255 * f(8)),
+    Math.round(255 * f(4)),
+  ];
+};

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { create } from "zustand";
 
 export type ColorFormatKeys = "primary" | "secondary" | "accent" | "foreground";
@@ -7,10 +8,22 @@ interface ColorState {
   palettes: {
     id: string;
     colorFormat: {
-      primary: ColorFormatValues;
-      secondary: ColorFormatValues;
-      accent: ColorFormatValues;
-      foreground: ColorFormatValues;
+      primary: {
+        format: ColorFormatValues;
+        autogenerateShades: boolean;
+      };
+      secondary: {
+        format: ColorFormatValues;
+        autogenerateShades: boolean;
+      };
+      accent: {
+        format: ColorFormatValues;
+        autogenerateShades: boolean;
+      };
+      foreground: {
+        format: ColorFormatValues;
+        autogenerateShades: boolean;
+      };
     };
   }[];
   setColorFormat: (
@@ -18,13 +31,6 @@ interface ColorState {
     key: ColorFormatKeys,
     value: ColorFormatValues
   ) => void;
-
-  getPaletteColorFormat: (id: string) => {
-    primary: ColorFormatValues;
-    secondary: ColorFormatValues;
-    accent: ColorFormatValues;
-    foreground: ColorFormatValues;
-  };
 
   getPaletteColorFormatValue: (
     id: string,
@@ -37,14 +43,27 @@ const useColorOptions = create<ColorState>((set, get) => ({
     {
       id: "0",
       colorFormat: {
-        primary: "hex",
-        secondary: "hex",
-        accent: "hex",
-        foreground: "hex",
+        primary: {
+          format: "hex",
+          autogenerateShades: false,
+        },
+        secondary: {
+          format: "hex",
+          autogenerateShades: false,
+        },
+        accent: {
+          format: "hex",
+          autogenerateShades: false,
+        },
+        foreground: {
+          format: "hex",
+          autogenerateShades: false,
+        },
       },
     },
   ],
   setColorFormat: (id, key, value) => {
+    console.log("setColorFormat", id, key, value);
     set((state) => ({
       palettes: state.palettes.map((p) => {
         if (p.id === id) {
@@ -52,42 +71,47 @@ const useColorOptions = create<ColorState>((set, get) => ({
             ...p,
             colorFormat: {
               ...p.colorFormat,
-              [key]: value,
+              [key]: {
+                ...p.colorFormat[key],
+                format: value,
+              },
             },
           };
         }
+        console.log(state.palettes);
         return {
           id,
           colorFormat: {
-            primary: "hex",
-            secondary: "hex",
-            accent: "hex",
-            foreground: "hex",
-            [key]: value,
+            primary: {
+              format: 'hex',
+              autogenerateShades: false,
+            },
+            secondary: {
+              format: 'hex',
+              autogenerateShades: false,
+            },
+            accent: {
+              format: 'hex',
+              autogenerateShades: false,
+            },
+            foreground: {
+              format: 'hex',
+              autogenerateShades: false,
+            },
+            [key]: {
+              format: value,
+              autogenerateShades: false,
+            },
           },
         };
       }),
     }));
   },
-  getPaletteColorFormat: (id: string) => {
-    const state = get();
-    const palette = state.palettes.find((p) => p.id === id);
-    if (palette) {
-      return palette.colorFormat;
-    }
-    return {
-      primary: "hex",
-      secondary: "hex",
-      accent: "hex",
-      foreground: "hex",
-    };
-  },
-
   getPaletteColorFormatValue: (id: string, key: ColorFormatKeys) => {
     const state = get();
     const palette = state.palettes.find((p) => p.id === id);
     if (palette) {
-      return palette.colorFormat[key];
+      return palette.colorFormat[key]["format"];
     }
     return "hex";
   },

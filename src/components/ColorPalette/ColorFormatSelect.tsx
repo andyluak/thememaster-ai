@@ -20,10 +20,22 @@ const ColorFormatSelect = ({ colorName, paletteId }: Props) => {
     return (
       state.palettes.find((palette) => palette.id === paletteId) || {
         colorFormat: {
-          primary: "hex",
-          secondary: "hex",
-          accent: "hex",
-          foreground: "hex",
+          primary: {
+            format: "hex",
+            autogenerateShades: true,
+          },
+          secondary: {
+            format: "hex",
+            autogenerateShades: true,
+          },
+          accent: {
+            format: "hex",
+            autogenerateShades: true,
+          },
+          foreground: {
+            format: "hex",
+            autogenerateShades: true,
+          },
         },
       }
     );
@@ -31,7 +43,7 @@ const ColorFormatSelect = ({ colorName, paletteId }: Props) => {
   const setColorFormat = useColorOptions((state) => state.setColorFormat);
   return (
     <Select
-      value={colorFormat[colorName]}
+      value={colorFormat[colorName]["format"]}
       onValueChange={(value: ColorFormatValues) =>
         setColorFormat(paletteId, colorName, value)
       }
