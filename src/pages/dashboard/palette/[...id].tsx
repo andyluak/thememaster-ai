@@ -34,7 +34,7 @@ const SinglePalette = () => {
       ...palette.colors,
     };
     shades.map((shade) => {
-      const shadeParent = shade.name.split("-")[0]!;
+      const shadeParent = shade.name.split("-")[0];
       const toMergeWith = palette?.colors?.[shadeParent] as Color[];
 
       const merged = toMergeWith.map((color: Color) => {
