@@ -32,7 +32,7 @@ interface ColorState {
   ) => ColorFormatValues;
 }
 
-const useColorFormat = create<ColorState>((set, get) => ({
+const useColorOptions = create<ColorState>((set, get) => ({
   palettes: [
     {
       id: "0",
@@ -97,8 +97,8 @@ export const usePaletteColorFormatValue = (
   id: string,
   key: ColorFormatKeys
 ) => {
-  const { getPaletteColorFormatValue } = useColorFormat();
+  const { getPaletteColorFormatValue } = useColorOptions();
   return getPaletteColorFormatValue(id, key);
 };
 
-export default useColorFormat;
+export default useColorOptions;

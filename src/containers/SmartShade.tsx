@@ -3,8 +3,8 @@ import type { Color } from "@prisma/client";
 import { rgbToHsl } from "lib/colors";
 import React from "react";
 import { HexColorPicker } from "react-colorful";
-import type { ColorFormatKeys } from "store/useColorFormat";
-import { usePaletteColorFormatValue } from "store/useColorFormat";
+import type { ColorFormatKeys } from "store/useColorOptions";
+import { usePaletteColorFormatValue } from "store/useColorOptions";
 
 import {
   Dialog,

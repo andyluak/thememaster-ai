@@ -1,5 +1,5 @@
 import React from "react";
-import type { ColorFormatKeys } from "store/useColorFormat";
+import type { ColorFormatKeys } from "store/useColorOptions";
 
 import AutogenerateShadesInput from "@/components/ColorPalette/AutogenerateShadesInput";
 import ColorFormatSelect from "@/components/ColorPalette/ColorFormatSelect";

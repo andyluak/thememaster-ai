@@ -1,6 +1,6 @@
 import React from "react";
-import type { ColorFormatKeys, ColorFormatValues } from "store/useColorFormat";
-import useColorFormat from "store/useColorFormat";
+import type { ColorFormatKeys, ColorFormatValues } from "store/useColorOptions";
+import useColorOptions from "store/useColorOptions";
 
 import {
   Select,
@@ -16,7 +16,7 @@ type Props = {
 };
 
 const ColorFormatSelect = ({ colorName, paletteId }: Props) => {
-  const { colorFormat } = useColorFormat((state) => {
+  const { colorFormat } = useColorOptions((state) => {
     return (
       state.palettes.find((palette) => palette.id === paletteId) || {
         colorFormat: {
@@ -28,7 +28,7 @@ const ColorFormatSelect = ({ colorName, paletteId }: Props) => {
       }
     );
   });
-  const setColorFormat = useColorFormat((state) => state.setColorFormat);
+  const setColorFormat = useColorOptions((state) => state.setColorFormat);
   return (
     <Select
       value={colorFormat[colorName]}
