@@ -16,6 +16,7 @@ import SmartShade from "@/containers/SmartShade";
 import SmartShadeHeader from "@/containers/SmartShadeHeader";
 
 import usePalette from "@/queries/usePalette";
+import { Button } from "@/components/Button";
 
 const SinglePalette = () => {
   const { palette } = usePalette();
@@ -68,6 +69,13 @@ const SinglePalette = () => {
             );
           })}
         </div>
+        <Button
+          variant={"subtle"}
+          type="button"
+          className="bg-accent py-3 text-sm md:text-base md:py-6 px-6"
+        >
+          Save palette
+        </Button>
       </section>
     </main>
   );
