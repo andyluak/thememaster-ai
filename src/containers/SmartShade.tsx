@@ -74,6 +74,8 @@ const SmartShade = ({ color, paletteId }: Props) => {
 
   const handleShadeChange = () => {
     setIsOpen(false);
+    setTemporaryShade("#000000");
+    setShade(paletteId, name, temporaryShade);
   };
 
   return (

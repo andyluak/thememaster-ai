@@ -1,6 +1,5 @@
 import { create } from "zustand";
 
-export type ColorShadesKeys = "name" | "code";
 export type Shade = {
   name: string;
   code: string;
@@ -14,7 +13,7 @@ interface ColorShadesState {
   }[];
 
   setTemporaryShade: (value: string) => void;
-  setShade: (id: string, key: ColorShadesKeys, value: string) => void;
+  setShade: (id: string, key: string, value: string) => void;
 }
 
 const useColorShades = create<ColorShadesState>((set, get) => ({
