@@ -5,6 +5,8 @@ import React from "react";
 import { HexColorPicker } from "react-colorful";
 import type { ColorFormatKeys } from "store/useColorOptions";
 import { usePaletteColorFormatValue } from "store/useColorOptions";
+import type { Shade } from "store/useColorShades";
+import useColorShades from "store/useColorShades";
 
 import {
   Dialog,
@@ -58,6 +60,16 @@ const SmartShade = ({ color, paletteId }: Props) => {
       description: "The color code has been copied to your clipboard",
     });
   };
+  const temporaryShade = useColorShades((state) => state.temporaryShade);
+  const setTemporaryShade = useColorShades((state) => state.setTemporaryShade);
+  const setShade = useColorShades((state) => state.setShade);
+  const shade = useColorShades((state) => {
+    const palette = state.palettes.find((palette) => palette.id === paletteId);
+    const colorCode =
+      palette?.shades.find((shade) => shade.name === name) || "";
+
+    return colorCode || code;
+  }) as Shade;
 
   return (
     <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:items-center">
@@ -72,10 +84,10 @@ const SmartShade = ({ color, paletteId }: Props) => {
         <DialogContent>
           <DialogTitle>Select a new shade</DialogTitle>
           <HexColorPicker
-            color={code}
-            onChange={(color) => console.log(color)}
+            color={temporaryShade}
+            onChange={(color) => setTemporaryShade(color)}
           />
-          <DialogDescription>{code}</DialogDescription>
+          <DialogDescription>{temporaryShade}</DialogDescription>
         </DialogContent>
       </Dialog>
       <button onClick={copyToClipboard}>
