@@ -3,7 +3,7 @@ import { create } from "zustand";
 export type Shade = {
   name: string;
   code: string;
-}
+};
 
 interface ColorShadesState {
   temporaryShade: string;
@@ -24,30 +24,22 @@ const useColorShades = create<ColorShadesState>((set, get) => ({
     set({ temporaryShade: value });
   },
   setShade: (id, key, value) => {
-    set((state) => ({
-      palettes: state.palettes.map((p) => {
-        if (p.id === id) {
-          return {
-            ...p,
-            shades: p.shades.map((s) => {
-              if (s.name === key) {
-                return {
-                  ...s,
-                  code: value,
-                };
-              } else {
-                return { name: key, code: value };
-              }
-            }),
-          };
-        } else {
+    set((state) => {
+      return {
+        palettes: state.palettes.map((p) => {
+          if (p.id === id) {
+            return {
+              ...p,
+              shades: [...p.shades, { name: key, code: value }],
+            };
+          }
           return {
             id,
             shades: [{ name: key, code: value }],
           };
-        }
-      }),
-    }));
+        }),
+      };
+    });
   },
 }));
 

@@ -51,8 +51,6 @@ const SmartShade = ({ color, paletteId }: Props) => {
     }
   };
 
-  const formattedColor = newColorFormat(code);
-
   const { toast } = useToast();
   const copyToClipboard = async () => {
     await navigator.clipboard.writeText(formattedColor);
@@ -68,8 +66,7 @@ const SmartShade = ({ color, paletteId }: Props) => {
     const palette = state.palettes.find((palette) => palette.id === paletteId);
     const colorCode =
       palette?.shades.find((shade) => shade.name === name) || "";
-
-    return colorCode || code;
+    return colorCode;
   }) as Shade;
 
   const handleShadeChange = () => {
@@ -77,6 +74,7 @@ const SmartShade = ({ color, paletteId }: Props) => {
     setTemporaryShade("#000000");
     setShade(paletteId, name, temporaryShade);
   };
+  const formattedColor = newColorFormat(shade?.code ?? code);
 
   return (
     <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:items-center">
@@ -84,7 +82,7 @@ const SmartShade = ({ color, paletteId }: Props) => {
         <DialogTrigger>
           <div
             className="h-8 w-8 rounded-full border border-gray-600 md:h-10 md:w-10"
-            style={{ backgroundColor: code }}
+            style={{ backgroundColor: shade?.code ?? code }}
           />
         </DialogTrigger>
         <DialogContent>
