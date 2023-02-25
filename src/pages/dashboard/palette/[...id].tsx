@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import type {
   PaletteWithColors,
   PaletteWithExtendedColors,
@@ -17,11 +18,17 @@ import SmartShadeHeader from "@/containers/SmartShadeHeader";
 
 import usePalette from "@/queries/usePalette";
 import { Button } from "@/components/Button";
+import { useRouter } from "next/router";
 
 const SinglePalette = () => {
+  const router = useRouter();
   const { palette } = usePalette();
   const { name, colors, id } = palette as PaletteWithExtendedColors;
   const colorKeys = Object.keys(colors) as PaletteWithExtendedColorsKey[];
+
+  const handlePaletteSave = async () => {
+    await router.push("/dashboard");
+  }
 
   return (
     <main className="p-full">
@@ -73,6 +80,7 @@ const SinglePalette = () => {
           variant={"subtle"}
           type="button"
           className="bg-accent py-3 text-sm md:text-base md:py-6 px-6"
+          onClick={handlePaletteSave}
         >
           Save palette
         </Button>
