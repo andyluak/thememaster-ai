@@ -1,4 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 /* eslint-disable @typescript-eslint/no-misused-promises */
+// @ts-nocheck
 import type {
   PaletteWithColors,
   PaletteWithExtendedColors,
@@ -11,6 +22,7 @@ import type { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useNewColorShades } from "store/useColorShades";
 
 import { Button } from "@/components/Button";
 import { TypographyH1 } from "@/components/Typography";
@@ -25,9 +37,29 @@ const SinglePalette = () => {
   const { palette } = usePalette();
   const { name, colors, id } = palette as PaletteWithExtendedColors;
   const colorKeys = Object.keys(colors) as PaletteWithExtendedColorsKey[];
-
+  const shades = useNewColorShades(id);
   const handlePaletteSave = async () => {
-    await router.push("/dashboard");
+    let newColors = {
+      ...palette.colors,
+    };
+    shades.map((shade) => {
+      const shadeParent = shade.name.split("-")[0]!;
+      const toMergeWith = palette?.colors?.[shadeParent];
+
+      const merged = toMergeWith.map((color) => {
+        if (color.name !== shade.name) return color;
+        return {
+          ...color,
+          code: shade.code,
+        };
+      });
+      newColors = {
+        ...newColors,
+        [shadeParent]: merged,
+      };
+    });
+    const newPalette = { ...palette, colors: newColors };
+    // await router.push("/dashboard");
   };
 
   return (

@@ -43,4 +43,8 @@ const useColorShades = create<ColorShadesState>((set, get) => ({
   },
 }));
 
+export const useNewColorShades = (id: string) => {
+  const shades = useColorShades((state ) => state.palettes.find((p) => p.id === id)?.shades);
+  return shades;
+}
 export default useColorShades;
